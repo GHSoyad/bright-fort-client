@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import GoogleSignIn from '../../firebase/GoogleSignIn';
 
 const Register = () => {
     return (
@@ -26,6 +27,7 @@ const Register = () => {
                 </div>
                 <button className='btn btn-primary w-full mt-6'>Register</button>
                 <p className='text-base mt-4'>Already have an account? <Link to='/login' className='text-primary font-medium'>Login.</Link></p>
+                <GoogleSignIn></GoogleSignIn>
             </div>
         </div>
     );

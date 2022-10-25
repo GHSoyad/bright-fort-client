@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import GoogleSignIn from '../../firebase/GoogleSignIn';
 
 const Login = () => {
 
@@ -21,6 +22,7 @@ const Login = () => {
                 </div>
                 <button className='btn btn-primary w-full mt-6'>Login</button>
                 <p className='text-base mt-4'>Don't have an account? <Link to='/register' className='text-primary font-medium'>Register.</Link></p>
+                <GoogleSignIn></GoogleSignIn>
             </div>
         </div>
     );
