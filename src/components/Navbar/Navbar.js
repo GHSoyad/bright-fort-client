@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 
 const Navbar = () => {
     return (
-        <div className="navbar bg-base-100 container mx-auto max-w-screen-xl mb-12 justify-between">
+        <div className="navbar bg-base-100 container mx-auto max-w-screen-xl mb-10 mt-4 justify-between">
             <div className='hidden md:block'>
                 <Link to='/'><img src="logo.png" alt="" className='max-w-[260px] rounded' /></Link>
             </div>
