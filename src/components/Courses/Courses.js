@@ -6,15 +6,15 @@ const Courses = () => {
     const courses = useLoaderData();
 
     return (
-        <div className='container mx-auto max-w-screen-xl grid grid-cols-[300px_minmax(900px,_1fr)] gap-8 mb-12'>
-            <div className='border-2 border-primary p-4 rounded-lg relative'>
+        <div className='container mx-auto max-w-screen-xl md:grid grid-cols-[280px_minmax(0,_1fr)] gap-6 mb-12'>
+            <div className='border-2 border-primary mb-6 md:mb-0 p-4 rounded-lg relative'>
                 <div className='sticky top-4 flex flex-col gap-5'>
                     {
-                        courses.map(course => <Link key={course.id}><button className='btn glass'>{course.name}</button></Link>)
+                        courses.map(course => <Link to={`/course/${course.id}`} key={course.id}><button className='btn glass'>{course.name}</button></Link>)
                     }
                 </div>
             </div>
-            <div className='grid grid-cols-3 gap-6 px-4 rounded-lg'>
+            <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6 rounded-lg'>
                 {
                     courses.map(course => <Course key={course.id} course={course}></Course>)
                 }
