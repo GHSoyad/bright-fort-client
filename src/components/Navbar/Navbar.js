@@ -1,9 +1,22 @@
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Link, NavLink } from 'react-router-dom';
 import { UserContext } from '../../contexts/AuthProvider';
 
 const Navbar = () => {
-    const { userInfo } = useContext(UserContext);
+    const { userInfo, logOutUser } = useContext(UserContext);
+    const success = (message) => toast.success(message);
+    const failed = (message) => toast.error(message);
+
+    const handleUserLogOut = () => {
+        logOutUser()
+            .then(() => {
+                success('Logged out Successfully');
+            })
+            .catch(error => {
+                failed(error.message);
+            })
+    }
     return (
         <div className="navbar bg-base-100 container mx-auto max-w-screen-xl mb-10 mt-4 justify-between">
             <div className='hidden md:block'>
@@ -16,8 +29,17 @@ const Navbar = () => {
                 <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                     <li><NavLink to='/courses'>Courses</NavLink></li>
                     <li><NavLink to='/faq'>FAQ</NavLink></li>
-                    <li><NavLink to='/login'>Login</NavLink></li>
-                    <li><NavLink to='/register'>Register</NavLink></li>
+                    {(userInfo && userInfo.email) ?
+                        <>
+                            <li className='ml-4'>{userInfo.email}</li>
+                            <li><Link onClick={handleUserLogOut}>Logout</Link></li>
+                        </>
+                        :
+                        <>
+                            <li><NavLink to='/login'>Login</NavLink></li>
+                            <li><NavLink to='/register'>Register</NavLink></li>
+                        </>
+                    }
                 </ul>
             </div>
             <label className="swap swap-rotate mx-2 md:hidden">
@@ -29,11 +51,20 @@ const Navbar = () => {
                 <Link to='/'><img src="logo.png" alt="" className='max-w-[260px] rounded' /></Link>
             </div>
             <div className="hidden md:flex">
-                <ul className="menu menu-horizontal p-0 gap-2 font-medium">
+                <ul className="menu menu-horizontal p-0 gap-2 font-medium items-center">
                     <li><NavLink to='/courses' className='py-2.5 px-5'>Courses</NavLink></li>
                     <li><NavLink to='/faq' className='py-2.5 px-5'>FAQ</NavLink></li>
-                    <li><NavLink to='/login' className='py-2.5 px-5'>Login</NavLink></li>
-                    <li><NavLink to='/register' className='py-2.5 px-5'>Register</NavLink></li>
+                    {(userInfo && userInfo.email) ?
+                        <>
+                            <li>{userInfo.email}</li>
+                            <li><Link className='py-2.5 px-5' onClick={handleUserLogOut}>Logout</Link></li>
+                        </>
+                        :
+                        <>
+                            <li><NavLink to='/login' className='py-2.5 px-5'>Login</NavLink></li>
+                            <li><NavLink to='/register' className='py-2.5 px-5'>Register</NavLink></li>
+                        </>
+                    }
                 </ul>
                 <label className="swap swap-rotate ml-4">
                     <input type="checkbox" />
@@ -41,9 +72,7 @@ const Navbar = () => {
                     <svg className="swap-off fill-current w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" /></svg>
                 </label>
             </div>
-            <div>
-                {userInfo.email}
-            </div>
+
         </div>
     );
 };

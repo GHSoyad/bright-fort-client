@@ -1,8 +1,15 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { UserContext } from '../../contexts/AuthProvider';
 import GoogleSignIn from '../../firebase/GoogleSignIn';
 
 const Login = () => {
+
+    const { userInfo } = useContext(UserContext);
+    const navigate = useNavigate()
+    if (userInfo && userInfo.uid) {
+        navigate('/')
+    }
 
     return (
         <div className='bg-base-100 container mx-auto max-w-screen-xl mt-20'>
