@@ -1,17 +1,20 @@
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../contexts/AuthProvider';
 import GoogleSignIn from '../../firebase/GoogleSignIn';
 
 const Register = () => {
 
-    const { emailRegistration, errorMessage, setErrorMessage } = useContext(UserContext);
+    const { emailRegistration, profileUpdate, emailVerification, errorMessage, setErrorMessage } = useContext(UserContext);
+    const success = (message) => toast.success(message);
 
     const handleUserRegistration = (event) => {
         event.preventDefault();
-        const userName = event.target.name.value;
-        const userEmail = event.target.email.value;
-        const userPassword = event.target.password.value;
+        const form = event.target;
+        const userName = form.name.value;
+        const userEmail = form.email.value;
+        const userPassword = form.password.value;
 
         if (!/(?=.*[A-Z])/.test(userPassword)) {
             setErrorMessage('Password must contain a UpperCase Letter');
@@ -28,10 +31,30 @@ const Register = () => {
 
         emailRegistration(userEmail, userPassword)
             .then(userCredential => {
-
+                success("Please check email and verify!")
+                setErrorMessage('')
+                form.reset()
+                handleProfileUpdate(userName)
+                handleEmailVerification()
             }).catch(error => {
                 setErrorMessage(error.message)
             })
+    }
+
+    const handleProfileUpdate = (userName) => {
+        const profile = {
+            displayName: userName
+        }
+
+        profileUpdate(profile)
+            .then(() => { })
+            .catch(error => setErrorMessage(error.message))
+    }
+
+    const handleEmailVerification = () => {
+        emailVerification()
+            .then(() => { })
+            .catch(error => setErrorMessage(error.message))
     }
 
     return (
@@ -45,19 +68,19 @@ const Register = () => {
                     <label className="label">
                         <span>Your Name</span>
                     </label>
-                    <input name='name' type="text" placeholder="Type here..." className="input input-bordered input-primary" />
+                    <input name='name' type="text" placeholder="Type here..." className="input input-bordered input-primary" required />
                 </div>
                 <div className="form-control w-full mb-2">
                     <label className="label">
                         <span>Your Email</span>
                     </label>
-                    <input name='email' type="email" placeholder="Type here..." className="input input-bordered input-primary" />
+                    <input name='email' type="email" placeholder="Type here..." className="input input-bordered input-primary" required />
                 </div>
                 <div className="form-control w-full mb-2">
                     <label className="label">
                         <span>Your Password</span>
                     </label>
-                    <input name='password' type="password" placeholder="Type here..." className="input input-bordered input-primary" />
+                    <input name='password' type="password" placeholder="Type here..." className="input input-bordered input-primary" required />
                 </div>
                 <button type='submit' className='btn btn-primary w-full mt-6'>Register</button>
                 <p className='text-base mt-4'>Already have an account? <Link to='/login' className='text-primary font-medium'>Login.</Link></p>

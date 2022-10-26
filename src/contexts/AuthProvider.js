@@ -1,5 +1,5 @@
-import React, { createContext, useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
+import React, { createContext, useEffect, useState } from 'react';
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from '../firebase/firebase.config';
 
 export const UserContext = createContext();
@@ -14,6 +14,18 @@ const AuthProvider = ({ children }) => {
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
+    const emailSignIn = (email, password) => {
+        return signInWithEmailAndPassword(auth, email, password);
+    }
+
+    const profileUpdate = (profile) => {
+        return updateProfile(auth.currentUser, profile);
+    }
+
+    const emailVerification = () => {
+        return sendEmailVerification(auth.currentUser);
+    }
+
     const googleSignIn = (provider) => {
         return signInWithPopup(auth, provider);
     }
@@ -23,22 +35,19 @@ const AuthProvider = ({ children }) => {
     }
 
 
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            // User is signed in, see docs for a list of available properties
-            // https://firebase.google.com/docs/reference/js/firebase.User
-            setUserInfo(user)
-            // ...
-        } else {
-            // User is signed out
-            // ...
-            setUserInfo({})
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUserInfo(currentUser)
+        });
+
+        return () => {
+            unsubscribe()
         }
-    });
+    }, [])
 
 
 
-    const authInfo = { userInfo, emailRegistration, googleSignIn, errorMessage, setErrorMessage, logOutUser }
+    const authInfo = { userInfo, setUserInfo, emailRegistration, profileUpdate, emailVerification, emailSignIn, googleSignIn, errorMessage, setErrorMessage, logOutUser }
 
     return (
         <UserContext.Provider value={authInfo}>
