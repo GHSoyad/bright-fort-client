@@ -9,8 +9,8 @@ const TopRatedCourses = ({ course }) => {
             <figure><img src={img} alt="" /></figure>
             <div className="card-body">
                 <h2 className="card-title text-white">{name}</h2>
-                <p className='flex items-center text-xl gap-2 font-medium py-2 text-white'>Rating: {rating} <FaStar className='text-amber-300'></FaStar></p>
-                <Link to={`/course/${id}`}><button className="btn btn-primary w-full">Buy Now</button></Link>
+                <p className='flex items-center text-xl gap-2 font-medium py-3 text-white'>Rating: {rating} <FaStar className='text-amber-300'></FaStar></p>
+                <Link to={`/course/${id}`}><button className="btn btn-primary w-full">Get Course</button></Link>
             </div>
         </div>
     );

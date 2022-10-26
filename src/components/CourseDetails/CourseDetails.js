@@ -1,12 +1,12 @@
 import React, { createRef, useEffect, useRef, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
-import { FaUnlock, FaStar, FaDownload } from 'react-icons/fa';
+import { FaUnlock, FaStar, FaDownload, FaUser } from 'react-icons/fa';
 import Pdf from "react-to-pdf";
 
 const CourseDetails = () => {
 
     const course = useLoaderData();
-    const { name, img, description, overview, rating, id } = course;
+    const { name, img, description, overview, rating, id, enrolled } = course;
 
     const pdfRef = createRef();
 
@@ -36,7 +36,16 @@ const CourseDetails = () => {
                     <div className="card-body justify-end gap-0 p-0">
                         <div className='flex flex-col gap-4 p-8 backdrop-blur-sm bg-primary/30'>
                             <h1 className="card-title items-end text-3xl drop-shadow-md pr-12">{name}</h1>
-                            <p className='text-xl font-medium flex items-center'>Rating: {rating} <FaStar className='ml-2 text-amber-300'></FaStar></p>
+                            <div className='flex gap-12'>
+                                <div className='flex text-xl items-center gap-2'>
+                                    <FaStar className='text-amber-300'></FaStar>
+                                    <p className='font-medium'>Rating: {rating}</p>
+                                </div>
+                                <div className='flex text-xl items-center gap-2'>
+                                    <FaUser className='text-amber-300'></FaUser>
+                                    <p className='font-medium'>Users: {enrolled}</p>
+                                </div>
+                            </div>
                         </div>
                         <img src={img} alt="" className='w-full' />
                         <div className='p-6 md:p-8 backdrop-blur-sm bg-primary/30 flex flex-col gap-5'>

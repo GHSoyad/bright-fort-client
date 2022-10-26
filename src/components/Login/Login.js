@@ -7,7 +7,7 @@ import GoogleSignIn from '../../firebase/GoogleSignIn';
 
 const Login = () => {
 
-    const { emailSignIn, errorMessage, setErrorMessage, setLoading } = useContext(UserContext);
+    const { emailSignIn, setUserInfo, errorMessage, setErrorMessage, setLoading } = useContext(UserContext);
     const navigate = useNavigate()
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
@@ -23,6 +23,7 @@ const Login = () => {
                 const user = result.user;
                 setErrorMessage('')
                 if (user.emailVerified) {
+                    setUserInfo(user)
                     navigate(from, { replace: true })
                 } else {
                     toast.error('Please verify email!')
@@ -37,7 +38,7 @@ const Login = () => {
     }
 
     return (
-        <div className='bg-base-100 container mx-auto max-w-screen-xl mt-20'>
+        <div className='bg-base-100 container mx-auto max-w-screen-xl'>
             <div className='backdrop-blur-sm bg-white/10 max-w-md mx-auto p-8 rounded-lg text-xl'>
                 <form onSubmit={handleUserSignIn}>
                     <h1 className='text-3xl text-primary font-medium mb-6 text-center'>Login Here</h1>

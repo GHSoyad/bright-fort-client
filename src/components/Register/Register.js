@@ -66,7 +66,7 @@ const Register = () => {
     }
 
     return (
-        <div className='bg-base-100 container mx-auto max-w-screen-xl mt-20'>
+        <div className='bg-base-100 container mx-auto max-w-screen-xl'>
             <form onSubmit={handleUserRegistration} className='backdrop-blur-sm bg-white/10 max-w-md mx-auto p-8 rounded-lg text-xl'>
                 <h1 className='text-3xl text-primary font-medium mb-6 text-center'>Register Here</h1>
                 {
