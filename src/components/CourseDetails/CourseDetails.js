@@ -34,12 +34,12 @@ const CourseDetails = () => {
 
                 <div ref={elementRef}>
                     <div className="card-body justify-end gap-0 p-0">
-                        <div className='flex flex-col gap-4 p-8 backdrop-blur-sm bg-emerald-900/40'>
+                        <div className='flex flex-col gap-4 p-8 backdrop-blur-sm bg-primary/30'>
                             <h1 className="card-title items-end text-3xl drop-shadow-md pr-12">{name}</h1>
                             <p className='text-xl font-medium flex items-center'>Rating: {rating} <FaStar className='ml-2 text-amber-300'></FaStar></p>
                         </div>
                         <img src={img} alt="" className='w-full' />
-                        <div className='p-6 md:p-8 backdrop-blur-sm bg-emerald-900/40 flex flex-col gap-5'>
+                        <div className='p-6 md:p-8 backdrop-blur-sm bg-primary/30 flex flex-col gap-5'>
                             <div>
                                 <p className='text-xl font-medium mb-2'>Description:</p>
                                 <p className='text-xl'>{description}</p>

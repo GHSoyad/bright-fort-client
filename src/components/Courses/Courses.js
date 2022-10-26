@@ -7,7 +7,7 @@ const Courses = () => {
 
     return (
         <div className='container mx-auto max-w-screen-xl md:grid grid-cols-[280px_minmax(0,_1fr)] gap-6 mb-12'>
-            <div className='backdrop-blur-sm bg-emerald-900/40 mb-6 md:mb-0 p-4 rounded-lg relative'>
+            <div className='backdrop-blur-sm bg-primary/20 mb-6 md:mb-0 p-4 rounded-lg relative'>
                 <div className='sticky top-4 flex flex-col gap-5'>
                     {
                         courses.map(course => <Link to={`/course/${course.id}`} key={course.id}><button className='btn glass h-16'>{course.name}</button></Link>)
