@@ -1,7 +1,7 @@
 import React from 'react';
 import { Toaster } from 'react-hot-toast';
-import { Outlet } from 'react-router-dom';
-import Navbar from '../Navbar/Navbar';
+import { Outlet, ScrollRestoration } from 'react-router-dom';
+import Navbar from '../../components/Navbar/Navbar';
 
 const Main = () => {
     return (
@@ -9,6 +9,7 @@ const Main = () => {
             <Navbar></Navbar>
             <Outlet></Outlet>
             <Toaster></Toaster>
+            <ScrollRestoration></ScrollRestoration>
         </div>
     );
 };

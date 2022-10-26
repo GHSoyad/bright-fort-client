@@ -9,12 +9,15 @@ const AuthProvider = ({ children }) => {
     const auth = getAuth(app);
     const [userInfo, setUserInfo] = useState({});
     const [errorMessage, setErrorMessage] = useState('');
+    const [loading, setLoading] = useState(true);
 
     const emailRegistration = (email, password) => {
+        setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
     const emailSignIn = (email, password) => {
+        setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     }
 
@@ -27,10 +30,12 @@ const AuthProvider = ({ children }) => {
     }
 
     const googleSignIn = (provider) => {
+        setLoading(true);
         return signInWithPopup(auth, provider);
     }
 
     const logOutUser = () => {
+        setLoading(true);
         return signOut(auth);
     }
 
@@ -38,6 +43,7 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUserInfo(currentUser)
+            setLoading(false)
         });
 
         return () => {
@@ -47,7 +53,7 @@ const AuthProvider = ({ children }) => {
 
 
 
-    const authInfo = { userInfo, setUserInfo, emailRegistration, profileUpdate, emailVerification, emailSignIn, googleSignIn, errorMessage, setErrorMessage, logOutUser }
+    const authInfo = { userInfo, setUserInfo, emailRegistration, profileUpdate, emailVerification, emailSignIn, googleSignIn, errorMessage, setErrorMessage, logOutUser, loading }
 
     return (
         <UserContext.Provider value={authInfo}>

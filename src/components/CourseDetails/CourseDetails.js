@@ -6,7 +6,7 @@ import Pdf from "react-to-pdf";
 const CourseDetails = () => {
 
     const course = useLoaderData();
-    const { name, img, description, overview, rating } = course;
+    const { name, img, description, overview, rating, id } = course;
 
     const pdfRef = createRef();
 
@@ -52,7 +52,7 @@ const CourseDetails = () => {
                                     }
                                 </ul>
                             </div>
-                            <Link>
+                            <Link to={`/checkout/${id}`}>
                                 <button className='btn btn-primary mt-4'>Get Premium Access <FaUnlock className='ml-3'></FaUnlock></button>
                             </Link>
                         </div>
