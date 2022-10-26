@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/AuthProvider';
+import GithubSignIn from '../../firebase/GithubSignIn';
 import GoogleSignIn from '../../firebase/GoogleSignIn';
 
 const Login = () => {
 
-    const { userInfo, emailSignIn } = useContext(UserContext);
+    const { userInfo, emailSignIn, errorMessage, setErrorMessage, setLoading } = useContext(UserContext);
     const navigate = useNavigate()
     if (userInfo && userInfo.uid) {
         navigate('/')
@@ -21,11 +23,18 @@ const Login = () => {
         emailSignIn(userEmail, userPassword)
             .then(result => {
                 const user = result.user;
-                console.log(user)
-                navigate(from, { replace: true })
+                setErrorMessage('')
+                if (user.emailVerified) {
+                    navigate(from, { replace: true })
+                } else {
+                    toast.error('Please verify email!')
+                }
             })
             .catch(error => {
-                console.log(error.message)
+                setErrorMessage(error.message)
+            })
+            .finally(() => {
+                setLoading(false)
             })
     }
 
@@ -33,7 +42,11 @@ const Login = () => {
         <div className='bg-base-100 container mx-auto max-w-screen-xl mt-20'>
             <div className='backdrop-blur-sm bg-white/10 max-w-md mx-auto p-8 rounded-lg text-xl'>
                 <form onSubmit={handleUserSignIn}>
-                    <h1 className='text-3xl text-primary font-medium mb-12 text-center'>Login Here</h1>
+                    <h1 className='text-3xl text-primary font-medium mb-6 text-center'>Login Here</h1>
+                    {
+                        errorMessage &&
+                        <p className='text-center mb-2 text-base text-red-500'>{errorMessage}</p>
+                    }
                     <div className="form-control w-full mb-2">
                         <label className="label">
                             <span>Your Email</span>
@@ -47,9 +60,10 @@ const Login = () => {
                         <input type="password" name='password' placeholder="Type here..." className="input input-bordered input-primary" required />
                     </div>
                     <button type='submit' className='btn btn-primary w-full mt-6'>Login</button>
-                    <p className='text-base mt-4'>Don't have an account? <Link to='/register' className='text-primary font-medium'>Register.</Link></p>
+                    <p className='text-base mt-4 text-center'>Don't have an account? <Link to='/register' className='text-primary font-medium'>Register.</Link></p>
                 </form>
-                <GoogleSignIn></GoogleSignIn>
+                <GoogleSignIn from={from}></GoogleSignIn>
+                <GithubSignIn from={from}></GithubSignIn>
             </div>
         </div>
     );

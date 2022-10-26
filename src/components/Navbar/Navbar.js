@@ -1,19 +1,22 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/AuthProvider';
 import { FaUser } from "react-icons/fa";
+import logo from '../../logo.png'
 
 const Navbar = () => {
     const { userInfo, setUserInfo, logOutUser } = useContext(UserContext);
     const success = (message) => toast.success(message);
     const failed = (message) => toast.error(message);
+    const navigate = useNavigate();
 
     const handleUserLogOut = () => {
         logOutUser()
             .then(() => {
                 setUserInfo({});
                 success('Logged out Successfully');
+                navigate('/');
             })
             .catch(error => {
                 failed(error.message);
@@ -23,7 +26,7 @@ const Navbar = () => {
     return (
         <div className="navbar bg-base-100 container mx-auto max-w-screen-xl mb-10 mt-4 justify-between">
             <div className='hidden md:block w-64'>
-                <Link to='/'><img src="logo.png" alt="" className='w-full rounded' /></Link>
+                <Link to='/'><img src={logo} alt="" className='w-full h-full rounded' /></Link>
             </div>
             <div className="dropdown">
                 <label tabIndex={0} className="btn btn-ghost md:hidden">
@@ -37,7 +40,7 @@ const Navbar = () => {
                             <li className='ml-4 mt-2' title={userInfo.displayName || userInfo.email}>{userInfo.photoURL ?
                                 <img className='w-8 p-0' src={userInfo.photoURL} alt=''></img>
                                 :
-                                <FaUser className='text-primary p-1 text-3xl'></FaUser>
+                                <FaUser className='text-primary p-1 text-2xl'></FaUser>
                             }</li>
                             <li><Link onClick={handleUserLogOut}>Logout</Link></li>
                         </>
@@ -55,12 +58,13 @@ const Navbar = () => {
                 <svg className="swap-off fill-current w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" /></svg>
             </label>
             <div className='md:hidden w-64'>
-                <Link to='/'><img src="logo.png" alt="" className='w-full rounded' /></Link>
+                <Link to='/'><img src={logo} alt="" className='w-full rounded' /></Link>
             </div>
             <div className="hidden md:flex">
                 <ul className="menu menu-horizontal p-0 gap-2 font-medium items-center">
                     <li><NavLink to='/courses' className='py-2.5 px-5'>Courses</NavLink></li>
                     <li><NavLink to='/faq' className='py-2.5 px-5'>FAQ</NavLink></li>
+                    <li><NavLink to='/blog' className='py-2.5 px-5'>Blog</NavLink></li>
                     {(userInfo && userInfo.email) ?
                         <>
                             <li><Link className='py-2.5 px-5' onClick={handleUserLogOut}>Logout</Link></li>

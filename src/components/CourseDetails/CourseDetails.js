@@ -26,19 +26,19 @@ const CourseDetails = () => {
     };
 
     return (
-        <div className='container mx-auto max-w-screen-xl mb-8'>
+        <div className='container mx-auto max-w-screen-xl'>
             <div ref={pdfRef} className="card bg-base-100 relative">
                 <Pdf targetRef={pdfRef} filename={`${name}.pdf`} options={options}>
-                    {({ toPdf }) => <button onClick={toPdf} className='text-primary text-2xl p-2 rounded-full absolute top-0 right-0 z-50 hover:bg-secondary/20'><FaDownload></FaDownload></button>}
+                    {({ toPdf }) => <button onClick={toPdf} className='text-primary text-2xl p-2 rounded-full absolute top-4 right-4 z-50 hover:bg-secondary/20'><FaDownload></FaDownload></button>}
                 </Pdf>
 
                 <div ref={elementRef}>
                     <div className="card-body justify-end gap-0 p-0">
-                        <div className='flex flex-col gap-4'>
+                        <div className='flex flex-col gap-4 p-8 backdrop-blur-sm bg-emerald-900/40'>
                             <h1 className="card-title items-end text-3xl drop-shadow-md pr-12">{name}</h1>
                             <p className='text-xl font-medium flex items-center'>Rating: {rating} <FaStar className='ml-2 text-amber-300'></FaStar></p>
-                            <img src={img} alt="" className='w-full' />
                         </div>
+                        <img src={img} alt="" className='w-full' />
                         <div className='p-6 md:p-8 backdrop-blur-sm bg-emerald-900/40 flex flex-col gap-5'>
                             <div>
                                 <p className='text-xl font-medium mb-2'>Description:</p>
