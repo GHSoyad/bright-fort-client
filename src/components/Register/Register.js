@@ -18,14 +18,17 @@ const Register = () => {
         const userEmail = form.email.value;
         const userPassword = form.password.value;
 
+        // Check if password has uppercase letter
         if (!/(?=.*[A-Z])/.test(userPassword)) {
             setErrorMessage('Password must contain a UpperCase Letter');
             return;
         }
+        // Check if password has lowercase letter
         if (!/(?=.*[a-z])/.test(userPassword)) {
             setErrorMessage('Password must contain a LowerCase Letter');
             return;
         }
+        // Check if password has digit letter
         if (!/(?=.*[0-9])/.test(userPassword)) {
             setErrorMessage('Password must contain a Digit');
             return;
@@ -43,6 +46,7 @@ const Register = () => {
             })
     }
 
+    // Update user profile
     const handleProfileUpdate = (userName, userPhoto) => {
         const profile = {
             displayName: userName,
@@ -54,6 +58,7 @@ const Register = () => {
             .catch(error => setErrorMessage(error.message))
     }
 
+    // Send email verification
     const handleEmailVerification = () => {
         emailVerification()
             .then(() => { })

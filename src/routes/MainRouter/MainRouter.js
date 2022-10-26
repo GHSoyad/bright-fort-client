@@ -18,25 +18,25 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                loader: () => fetch('http://localhost:5000/courses'),
+                loader: () => fetch('https://bright-fort-server.vercel.app/courses'),
                 element: <Home></Home>,
             },
             {
                 path: '/courses',
-                loader: () => fetch('http://localhost:5000/courses'),
+                loader: () => fetch('https://bright-fort-server.vercel.app/courses'),
                 element: <Courses></Courses>
             },
             {
                 path: '/course/:id',
                 loader: ({ params }) => {
-                    return fetch(`http://localhost:5000/course/${params.id}`)
+                    return fetch(`https://bright-fort-server.vercel.app/course/${params.id}`)
                 },
                 element: <CourseDetails></CourseDetails>
             },
             {
                 path: '/checkout/:id',
                 loader: ({ params }) => {
-                    return fetch(`http://localhost:5000/course/${params.id}`)
+                    return fetch(`https://bright-fort-server.vercel.app/course/${params.id}`)
                 },
                 element: <PrivateRouter><Checkout></Checkout></PrivateRouter>
             },

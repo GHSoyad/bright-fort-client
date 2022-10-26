@@ -4,6 +4,8 @@ import TopRatedCourses from '../TopRatedCourses/TopRatedCourses';
 
 const Home = () => {
     const courses = useLoaderData();
+
+    // Filter top rated courses 
     const getTopRatedCourses = (courses) => {
         const filtered = courses.sort((a, b) => b.rating - a.rating);
         return filtered;

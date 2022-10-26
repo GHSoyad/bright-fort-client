@@ -7,14 +7,12 @@ import GoogleSignIn from '../../firebase/GoogleSignIn';
 
 const Login = () => {
 
-    const { userInfo, emailSignIn, errorMessage, setErrorMessage, setLoading } = useContext(UserContext);
+    const { emailSignIn, errorMessage, setErrorMessage, setLoading } = useContext(UserContext);
     const navigate = useNavigate()
-    if (userInfo && userInfo.uid) {
-        navigate('/')
-    }
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
 
+    // SignIn user
     const handleUserSignIn = (event) => {
         event.preventDefault();
         const userEmail = event.target.email.value;

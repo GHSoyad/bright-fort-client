@@ -10,12 +10,13 @@ const Navbar = () => {
     const success = (message) => toast.success(message);
     const failed = (message) => toast.error(message);
     const navigate = useNavigate();
-    const [theme, setTheme] = useState(false)
+    const [theme, setTheme] = useState(false);
 
+    // Logout user
     const handleUserLogOut = () => {
         logOutUser()
             .then(() => {
-                setUserInfo({});
+                setUserInfo(null);
                 success('Logged out Successfully');
                 navigate('/');
             })
@@ -24,6 +25,7 @@ const Navbar = () => {
             })
     }
 
+    // Theme toggle state
     const themeToggle = (event) => {
         const e = event.target.checked;
         const element = document.querySelector('html');

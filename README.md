@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# Bright Fort
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Live Website Link https://bright-fort.web.app/
 
-## Available Scripts
+## Description
+The Project is developed using React JS, Express JS and FireBase, The app is responsive on smaller devices
 
-In the project directory, you can run:
+### CSS Freamework
+TailWind CSS Framework and DaisyUI components
 
-### `npm start`
+### React Library's used
+Some of the library's that was used in the project
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### React Router
+ - To navigate the website
+ - To load data from the API
+ - To make dynamic paths for the website component
+ - To make private routing
+ - To redirect user
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#### React Hot Toast
+ - To display messages
 
-### `npm test`
+#### React Icons
+ - To display icons
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### React to PDF
+ - To create and download pdf file
 
-### `npm run build`
+### Pages
+The website consists of 5 main pages
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ - Home
+ - Courses
+ - FAQ
+ - Blogs
+ - Login
+ - Register
+ - Course Details
+ - Course Checkout
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The Course Details and Course Checkout pages are dynamic which changes based on selected course
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Features
+Features of the website
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ - Navbar can be used to navigate the website
+ - Navbar has conditional rendering based on user login and logout
+ - Navbar has a theme switching button that changes theme on click
+ - Homepage and Courses page contains Course list that can be selected
+ - Homepage has a list of top rated courses
+ - Selecting a Course takes user to the selected Course Details page
+ - Course Details page shows the description of the course
+ - Course Details page has a download button beside header, clicking on it downloads a pdf of the entire component
+ - At the bottom of Course Details page there is a button that takes user to checkout page
+ - Checkout page is private only a logged in user can access this page
+ - FAQ page shows some commonly answered questions
+ - Blogs page shows the list of blogs
+ - Login page has email-password, google and github login options
+ - Register page has email-password, google and github registration options
+ - Footer has the links of social media icons

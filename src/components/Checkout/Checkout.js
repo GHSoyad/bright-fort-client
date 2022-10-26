@@ -5,7 +5,6 @@ const Checkout = () => {
 
     const course = useLoaderData();
     const { name } = course;
-    console.log(course)
 
     return (
         <div className='container mx-auto max-w-screen-xl text-center'>
