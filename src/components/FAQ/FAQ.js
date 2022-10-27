@@ -2,7 +2,7 @@ import React from 'react';
 
 const FAQ = () => {
     return (
-        <div className='container px-2 md:px-4 xl:px-0 mx-auto max-w-screen-xl'>
+        <div className='container px-2 md:px-4 xl:px-0 mx-auto max-w-screen-xl min-h-[calc(100vh_-_380px)]'>
             <div className='flex flex-col gap-2'>
                 <div className="collapse collapse-arrow border border-base-300 bg-secondary/30 rounded-box">
                     <input type="checkbox" className="peer" />
