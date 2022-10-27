@@ -6,7 +6,7 @@ const Courses = () => {
     const courses = useLoaderData();
 
     return (
-        <div className='container mx-auto max-w-screen-xl md:grid grid-cols-[280px_minmax(0,_1fr)] gap-6 mb-12'>
+        <div className='container px-2 md:px-4 xl:px-0 mx-auto max-w-screen-xl md:grid grid-cols-[280px_minmax(0,_1fr)] gap-6 mb-12'>
             <div className='backdrop-blur-sm bg-primary/20 mb-6 md:mb-0 p-4 rounded-lg relative'>
                 <div className='sticky top-4 flex flex-col gap-5'>
                     {

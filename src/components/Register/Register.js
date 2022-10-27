@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/AuthProvider';
 import GithubSignIn from '../../firebase/GithubSignIn';
 import GoogleSignIn from '../../firebase/GoogleSignIn';
@@ -8,7 +8,8 @@ import GoogleSignIn from '../../firebase/GoogleSignIn';
 const Register = () => {
 
     const { emailRegistration, profileUpdate, emailVerification, errorMessage, setErrorMessage } = useContext(UserContext);
-    const success = (message) => toast.success(message);
+    const success = (message) => toast.success(message, { duration: 8000 });
+    const navigate = useNavigate();
 
     const handleUserRegistration = (event) => {
         event.preventDefault();
@@ -36,11 +37,12 @@ const Register = () => {
 
         emailRegistration(userEmail, userPassword)
             .then(userCredential => {
-                success("Please check email and verify!")
                 setErrorMessage('')
                 form.reset()
                 handleProfileUpdate(userName, userPhoto)
                 handleEmailVerification()
+                navigate('/login')
+                success("Registered Successfully.\nPlease check email and verify!")
             }).catch(error => {
                 setErrorMessage(error.message)
             })
@@ -66,7 +68,7 @@ const Register = () => {
     }
 
     return (
-        <div className='bg-base-100 container mx-auto max-w-screen-xl'>
+        <div className='bg-base-100 container px-2 md:px-4 xl:px-0 mx-auto max-w-screen-xl'>
             <form onSubmit={handleUserRegistration} className='backdrop-blur-sm bg-white/10 max-w-md mx-auto p-8 rounded-lg text-xl'>
                 <h1 className='text-3xl text-primary font-medium mb-6 text-center'>Register Here</h1>
                 {

@@ -7,7 +7,7 @@ const Course = ({ course }) => {
         <div className="card card-compact glass">
             <figure><img src={img} alt="" className='h-44 w-full object-cover' /></figure>
             <div className="card-body justify-between">
-                <h2 className="card-title">{name}</h2>
+                <h2 className="card-title py-2">{name}</h2>
                 <div className='pt-2'>
                     <Link to={`/course/${id}`}><button className='btn btn-primary w-full'>Get Course</button></Link>
                 </div>

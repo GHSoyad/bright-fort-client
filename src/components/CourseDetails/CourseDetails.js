@@ -26,22 +26,22 @@ const CourseDetails = () => {
     };
 
     return (
-        <div className='container mx-auto max-w-screen-xl'>
+        <div className='container px-2 md:px-4 xl:px-0 mx-auto max-w-screen-xl'>
             <div ref={pdfRef} className="card bg-base-100 relative">
                 <Pdf targetRef={pdfRef} filename={`${name}.pdf`} options={options}>
-                    {({ toPdf }) => <button onClick={toPdf} className='text-primary text-2xl p-2 rounded-full absolute top-4 right-4 z-50 hover:bg-secondary/20'><FaDownload></FaDownload></button>}
+                    {({ toPdf }) => <button onClick={toPdf} className='text-primary text-2xl p-2 rounded-full absolute top-6 right-4 z-50 hover:bg-secondary/20'><FaDownload></FaDownload></button>}
                 </Pdf>
 
                 <div ref={elementRef}>
                     <div className="card-body justify-end gap-0 p-0">
                         <div className='flex flex-col gap-4 p-8 backdrop-blur-sm bg-primary/30'>
-                            <h1 className="card-title items-end text-3xl drop-shadow-md pr-12">{name}</h1>
-                            <div className='flex gap-12'>
-                                <div className='flex text-xl items-center gap-2'>
+                            <h1 className="card-title items-end text-2xl md:text-3xl drop-shadow-md pr-8 md:pr-12">{name}</h1>
+                            <div className='flex gap-8 md:gap-12 text-lg md:text-xl'>
+                                <div className='flex items-center gap-2'>
                                     <FaStar className='text-amber-300'></FaStar>
                                     <p className='font-medium'>Rating: {rating}</p>
                                 </div>
-                                <div className='flex text-xl items-center gap-2'>
+                                <div className='flex items-center gap-2'>
                                     <FaUser className='text-amber-300'></FaUser>
                                     <p className='font-medium'>Users: {enrolled}</p>
                                 </div>

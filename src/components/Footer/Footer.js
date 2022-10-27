@@ -3,9 +3,9 @@ import { FaFacebookF, FaGithub, FaLinkedinIn } from 'react-icons/fa';
 
 const Footer = () => {
     return (
-        <div className='w-full bg-primary/30 mt-16'>
-            <div className='container px-4 md:px-8 xl:px-0 mx-auto max-w-screen-xl'>
-                <div className='py-7'>
+        <div className='w-full bg-primary/30 mt-12 md:mt-16'>
+            <div className='container px-2 md:px-4 xl:px-0 mx-auto max-w-screen-xl'>
+                <div className='py-5 md:py-7'>
                     <div className='flex flex-col justify-center items-center gap-5 text-center'>
                         <h3 className='text-2xl font-bold'>Follow Us</h3>
                         <div className='flex items-center text-5xl text-primary gap-6'>
