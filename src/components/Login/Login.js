@@ -7,7 +7,7 @@ import GoogleSignIn from '../../firebase/GoogleSignIn';
 
 const Login = () => {
 
-    const { emailSignIn, setUserInfo, errorMessage, setErrorMessage, setLoading } = useContext(UserContext);
+    const { emailSignIn, setUserInfo, setLoading } = useContext(UserContext);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
@@ -21,13 +21,8 @@ const Login = () => {
         emailSignIn(userEmail, userPassword)
             .then(result => {
                 const user = result.user;
-                setErrorMessage('')
-                if (user.emailVerified) {
-                    setUserInfo(user)
-                    navigate(from, { replace: true })
-                } else {
-                    toast.error('Please verify email!')
-                }
+                setUserInfo(user)
+                navigate(from, { replace: true })
             })
             .catch(error => {
                 toast.error(error.message)
@@ -38,14 +33,10 @@ const Login = () => {
     }
 
     return (
-        <div className='bg-base-100 container px-2 md:px-4 xl:px-0 mx-auto max-w-screen-xl'>
+        <div className='bg-base-100 container px-2 md:px-4 xl:px-0 mx-auto max-w-screen-xl min-h-[calc(100vh_-_380px)]'>
             <div className='backdrop-blur-sm bg-white/10 max-w-md mx-auto p-8 rounded-lg text-xl'>
                 <form onSubmit={handleUserSignIn}>
                     <h1 className='text-3xl text-primary font-medium mb-6 text-center'>Login Here</h1>
-                    {
-                        errorMessage &&
-                        <p className='text-center mb-2 text-base text-red-500'>{errorMessage}</p>
-                    }
                     <div className="form-control w-full mb-2">
                         <label className="label">
                             <span>Your Email</span>

@@ -7,7 +7,7 @@ import GoogleSignIn from '../../firebase/GoogleSignIn';
 
 const Register = () => {
 
-    const { emailRegistration, profileUpdate, emailVerification, errorMessage, setErrorMessage } = useContext(UserContext);
+    const { emailRegistration, profileUpdate } = useContext(UserContext);
     const success = (message) => toast.success(message, { duration: 8000 });
     const navigate = useNavigate();
 
@@ -21,30 +21,29 @@ const Register = () => {
 
         // Check if password has uppercase letter
         if (!/(?=.*[A-Z])/.test(userPassword)) {
-            setErrorMessage('Password must contain a UpperCase Letter');
+            toast.error('Password must contain a UpperCase Letter');
             return;
         }
         // Check if password has lowercase letter
         if (!/(?=.*[a-z])/.test(userPassword)) {
-            setErrorMessage('Password must contain a LowerCase Letter');
+            toast.error('Password must contain a LowerCase Letter');
             return;
         }
         // Check if password has digit letter
         if (!/(?=.*[0-9])/.test(userPassword)) {
-            setErrorMessage('Password must contain a Digit');
+            toast.error('Password must contain a Digit');
             return;
         }
 
         emailRegistration(userEmail, userPassword)
             .then(userCredential => {
-                setErrorMessage('')
                 form.reset()
                 handleProfileUpdate(userName, userPhoto)
-                handleEmailVerification()
-                navigate('/login')
-                success("Registered Successfully.\nPlease check email and verify!")
-            }).catch(error => {
-                setErrorMessage(error.message)
+                navigate('/')
+                success("Registered Successfully.")
+            })
+            .catch(error => {
+                toast.error(error.message)
             })
     }
 
@@ -57,27 +56,16 @@ const Register = () => {
 
         profileUpdate(profile)
             .then(() => { })
-            .catch(error => setErrorMessage(error.message))
-    }
-
-    // Send email verification
-    const handleEmailVerification = () => {
-        emailVerification()
-            .then(() => { })
-            .catch(error => setErrorMessage(error.message))
+            .catch(error => toast.error(error.message))
     }
 
     return (
         <div className='bg-base-100 container px-2 md:px-4 xl:px-0 mx-auto max-w-screen-xl'>
             <form onSubmit={handleUserRegistration} className='backdrop-blur-sm bg-white/10 max-w-md mx-auto p-8 rounded-lg text-xl'>
                 <h1 className='text-3xl text-primary font-medium mb-6 text-center'>Register Here</h1>
-                {
-                    errorMessage &&
-                    <p className='text-center mb-2 text-base text-red-500'>{errorMessage}</p>
-                }
                 <div className="form-control w-full mb-2">
                     <label className="label">
-                        <span>Your Name</span>
+                        <span>Your Full Name</span>
                     </label>
                     <input name='name' type="text" placeholder="Type here..." className="input input-bordered input-primary" required />
                 </div>

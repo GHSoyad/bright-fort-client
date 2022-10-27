@@ -1,21 +1,25 @@
 import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { FaGoogle } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../contexts/AuthProvider';
 
 const GoogleSignIn = ({ from }) => {
-    const { googleSignIn, setErrorMessage } = useContext(UserContext);
+    const { googleSignIn, setLoading } = useContext(UserContext);
     const googleProvider = new GoogleAuthProvider();
     const navigate = useNavigate();
 
     const handleGoogleSignIn = () => {
         googleSignIn(googleProvider)
             .then((result) => {
-                setErrorMessage('')
                 navigate(from, { replace: true })
-            }).catch(error => {
-                setErrorMessage(error.message)
+            })
+            .catch(error => {
+                toast.error(error.message)
+            })
+            .finally(() => {
+                setLoading(false)
             })
     }
 

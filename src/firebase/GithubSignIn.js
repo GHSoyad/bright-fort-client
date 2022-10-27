@@ -6,18 +6,20 @@ import { FaGithub } from "react-icons/fa";
 
 const GithubSignIn = ({ from }) => {
 
-    const { githubSignIn, setErrorMessage } = useContext(UserContext);
+    const { githubSignIn, setLoading } = useContext(UserContext);
     const githubProvider = new GithubAuthProvider();
     const navigate = useNavigate();
 
     const handleGithubSignIn = () => {
         githubSignIn(githubProvider)
             .then(result => {
-                setErrorMessage('')
                 navigate(from, { replace: true })
             })
             .catch(error => {
-                setErrorMessage(error)
+                console.error(error)
+            })
+            .finally(() => {
+                setLoading(false)
             })
     }
 

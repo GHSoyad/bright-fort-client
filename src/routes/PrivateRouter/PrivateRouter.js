@@ -10,7 +10,7 @@ const PrivateRouter = ({ children }) => {
 
     if (loading) {
         return (
-            <div className='text-center font-medium flex justify-center items-center text-xl'>
+            <div className='text-center font-medium flex justify-center items-center text-xl min-h-[calc(100vh_-_380px)]'>
                 <FaSpinner className="animate-spin mr-3 text-primary text-3xl"></FaSpinner>
                 Logging in...
             </div>

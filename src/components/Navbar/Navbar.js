@@ -7,8 +7,6 @@ import logo from '../../logo.png'
 
 const Navbar = () => {
     const { userInfo, setUserInfo, logOutUser } = useContext(UserContext);
-    const success = (message) => toast.success(message);
-    const failed = (message) => toast.error(message);
     const navigate = useNavigate();
     const [theme, setTheme] = useState(false);
 
@@ -17,11 +15,11 @@ const Navbar = () => {
         logOutUser()
             .then(() => {
                 setUserInfo(null);
-                success('Logged out Successfully');
+                toast.success('Logged out Successfully');
                 navigate('/');
             })
             .catch(error => {
-                failed(error.message);
+                toast.error(error.message);
             })
     }
 
@@ -51,10 +49,10 @@ const Navbar = () => {
                         <li><NavLink to='/courses'>Courses</NavLink></li>
                         <li><NavLink to='/blogs'>Blogs</NavLink></li>
                         <li><NavLink to='/faq'>FAQ</NavLink></li>
-                        {(userInfo && userInfo.email) ?
+                        {(userInfo && userInfo.uid) ?
                             <>
-                                <li className='ml-4 mt-2' title={userInfo.displayName || userInfo.email}>{userInfo.photoURL ?
-                                    <img className='w-8 p-0' src={userInfo.photoURL} alt=''></img>
+                                <li className='ml-4 mt-2' title={userInfo.displayName || userInfo.email}>{userInfo?.photoURL ?
+                                    <img className='w-8 p-0' src={userInfo?.photoURL} alt=''></img>
                                     :
                                     <FaUser className='text-primary p-1 text-2xl'></FaUser>
                                 }</li>
@@ -82,7 +80,7 @@ const Navbar = () => {
                     <li><NavLink to='/courses' className='py-2.5 px-5'>Courses</NavLink></li>
                     <li><NavLink to='/blogs' className='py-2.5 px-5'>Blogs</NavLink></li>
                     <li><NavLink to='/faq' className='py-2.5 px-5'>FAQ</NavLink></li>
-                    {(userInfo && userInfo.email) ?
+                    {(userInfo && userInfo.uid) ?
                         <>
                             <li><Link className='py-2.5 px-5' onClick={handleUserLogOut}>Logout</Link></li>
                             <li title={userInfo.displayName || userInfo.email}>{userInfo.photoURL ?

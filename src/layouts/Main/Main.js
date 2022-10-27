@@ -10,7 +10,7 @@ const Main = () => {
             <Navbar></Navbar>
             <Outlet></Outlet>
             <Footer></Footer>
-            <Toaster></Toaster>
+            <Toaster toastOptions={{ duration: 6000 }}></Toaster>
             <ScrollRestoration></ScrollRestoration>
         </div>
     );
